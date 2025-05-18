@@ -31,6 +31,21 @@
   }
 }
 
+.solarSystemOrbit {
+  position: relative;
+  width: 700px;
+  height: 700px;
+  margin: 0 auto;
+}
+
+.sunCenter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
 .sunCard {
   flex-shrink: 0;
 }
@@ -38,4 +53,15 @@
 .planetsRow {
   display: flex;
   gap: 32px;
+}
+
+.planetOrbitPath {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  pointer-events: none;
+  box-sizing: border-box;
 }

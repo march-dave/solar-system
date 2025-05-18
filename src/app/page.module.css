@@ -19,6 +19,16 @@
   align-items: center;
   gap: 40px;
   margin-top: 40px;
+  animation: orbit 60s linear infinite;
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .sunCard {

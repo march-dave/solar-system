@@ -14,3 +14,13 @@ npm run dev
 Then open `http://localhost:3000` in your browser.
 
 Because this environment may not allow installing packages, the project is provided without the `node_modules` directory.
+
+## Linting
+
+Run the linter with:
+
+```bash
+npm run lint
+```
+
+The script checks for `node_modules/.bin/next` and exits with an error if the dependency is missing.

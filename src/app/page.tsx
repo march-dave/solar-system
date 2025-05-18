@@ -6,10 +6,15 @@ export default function HomePage() {
   return (
     <main className={styles.main}>
       <h1>Solar System</h1>
-      <div className={styles.grid}>
-        {planets.map((planet) => (
-          <PlanetCard key={planet.name} planet={planet} />
-        ))}
+      <div className={styles.solarSystem}>
+        <div className={styles.sunCard}>
+          <PlanetCard planet={planets[0]} />
+        </div>
+        <div className={styles.planetsRow}>
+          {planets.slice(1).map((planet) => (
+            <PlanetCard key={planet.name} planet={planet} />
+          ))}
+        </div>
       </div>
     </main>
   );

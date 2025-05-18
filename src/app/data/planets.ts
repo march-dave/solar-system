@@ -6,6 +6,11 @@ export interface Planet {
 
 export const planets: Planet[] = [
   {
+    name: 'Sun',
+    image: '/sun.svg',
+    description: 'The star at the center of our solar system.'
+  },
+  {
     name: 'Mercury',
     image: '/mercury.svg',
     description: 'The smallest planet and closest to the Sun.'

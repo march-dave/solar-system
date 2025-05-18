@@ -10,3 +10,9 @@
 .card:hover {
   transform: scale(1.05);
 }
+
+.sun {
+  background: radial-gradient(circle, #ffe066 70%, #ffb700 100%) !important;
+  border: 2px solid #ffb700 !important;
+  box-shadow: 0 0 40px 10px #ffe066;
+}

@@ -7,8 +7,25 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(8, 1fr);
   gap: 20px;
   width: 100%;
-  max-width: 800px;
+  max-width: 1600px;
+  justify-items: center;
+}
+
+.solarSystem {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.sunCard {
+  flex-shrink: 0;
+}
+
+.planetsRow {
+  display: flex;
+  gap: 32px;
 }

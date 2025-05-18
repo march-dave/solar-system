@@ -43,63 +43,47 @@ export default function HomePage() {
         </button>
       </div>
       <div className={styles.solarSystemOrbit}>
-        <div className={styles.sunCenter}>
-          <PlanetCard planet={planets[0]} />
-        </div>
-        {/* 각 행성의 궤도(타원) 렌더링 */}
-        {planets.slice(1).map((_, idx) => {
-          const { a, e } = ORBIT_DATA[idx + 1];
-          const b = a * Math.sqrt(1 - e * e); // 단축 반지름
-          return (
-            <svg
-              key={"orbit-path-" + idx}
-              className={styles.planetOrbitPath}
-              width={a * 2}
-              height={a * 2}
-              style={{
-                position: 'absolute',
-                left: `calc(50% - ${a}px + ${a * e}px)`,
-                top: `calc(50% - ${b}px)`,
-                zIndex: 1,
-                pointerEvents: 'none',
-              }}
-            >
-              <ellipse
-                cx={a}
-                cy={b}
-                rx={a}
-                ry={b}
-                stroke="rgba(255,255,255,0.2)"
-                strokeWidth={1}
-                fill="none"
-              />
-            </svg>
-          );
-        })}
+        {/* 궤도 실선(ellipse SVG) 렌더링 부분 완전히 제거 */}
         {/* 행성 렌더링 */}
         {planets.slice(1).map((planet, idx) => {
           const { a, e } = ORBIT_DATA[idx + 1];
           const b = a * Math.sqrt(1 - e * e);
           const theta = (rotations[idx + 1] / 180) * Math.PI;
-          // 타원 방정식: x = a*cos(t), y = b*sin(t) (중심 기준)
-          // 중심은 궤도의 중앙이므로 실제 태양(초점)을 기준으로는 a*e만큼 이동
-          const x = a * Math.cos(theta);
+          // 초점 기준
+          const x = a * Math.cos(theta) - a * e;
           const y = b * Math.sin(theta);
+          // 행성 크기: 실제 지름 비율을 임의 스케일로 변환 (지구 40px 기준, 최소 16px, 최대 60px)
+          const DIAMETERS = [4879, 12104, 12756, 6792, 142984, 120536, 51118, 49528];
+          const EARTH_DIAMETER = 12756;
+          const EARTH_SIZE = 40; // px
+          const size = Math.max(16, Math.min(60, Math.round((DIAMETERS[idx] / EARTH_DIAMETER) * EARTH_SIZE)));
           return (
             <div
               key={planet.name}
               style={{
                 position: 'absolute',
-                left: `calc(50% + ${a * e + x}px)`,
+                left: `calc(50% + ${x}px)`,
                 top: `calc(50% + ${y}px)`,
                 transform: `translate(-50%, -50%)`,
                 zIndex: 3,
               }}
             >
-              <PlanetCard planet={planet} rotation={-rotations[idx + 1]} />
+              <PlanetCard planet={planet} rotation={-rotations[idx + 1]} size={size} />
             </div>
           );
         })}
+        {/* 태양은 항상 화면 중앙(초점) */}
+        <div
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 4,
+          }}
+        >
+          <PlanetCard planet={planets[0]} size={140} />
+        </div>
       </div>
     </main>
   );

@@ -82,6 +82,7 @@ export default function HomePage() {
           const b = a * Math.sqrt(1 - e * e);
           const theta = (rotations[idx + 1] / 180) * Math.PI;
           // 타원 방정식: x = a*cos(t), y = b*sin(t) (중심 기준)
+          // 중심은 궤도의 중앙이므로 실제 태양(초점)을 기준으로는 a*e만큼 이동
           const x = a * Math.cos(theta);
           const y = b * Math.sin(theta);
           return (
@@ -89,7 +90,7 @@ export default function HomePage() {
               key={planet.name}
               style={{
                 position: 'absolute',
-                left: `calc(50% + ${x}px)`,
+                left: `calc(50% + ${a * e + x}px)`,
                 top: `calc(50% + ${y}px)`,
                 transform: `translate(-50%, -50%)`,
                 zIndex: 3,
